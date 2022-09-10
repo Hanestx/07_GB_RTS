@@ -5,7 +5,7 @@ using TMPro;
 
 namespace RTS
 {
-    public class BottomLefPresenter : MonoBehaviour
+    public class BottomLeftPresenter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private Slider _healthSlider;

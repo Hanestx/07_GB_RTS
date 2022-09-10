@@ -8,10 +8,7 @@ namespace RTS
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private SelectableValue _selectedObject;
-
-        private bool _isSelect;
-        private OutlineX _outline;
-
+        
 
         private void Update()
         {
@@ -28,18 +25,6 @@ namespace RTS
                 .FirstOrDefault(c => c != null);
 
             _selectedObject.SetValue(selectable);
-            
-            if (_outline != null)
-                _outline.enabled = false;
-            
-            if (selectable != null)
-            {
-                _outline = hits
-                    .Select(hit => hit.collider.GetComponentInParent<OutlineX>())
-                    .FirstOrDefault(c => c != null);
-
-                _outline.enabled = true;
-            }
         }
     }
 }
