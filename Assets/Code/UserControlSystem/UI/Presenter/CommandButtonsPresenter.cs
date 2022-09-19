@@ -41,7 +41,7 @@ namespace RTS
         {
             if (commandExecutor is CommandExecutorBase<IProduceUnitCommand> produceCommand)
             {
-                produceCommand.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommand()));
+                produceCommand.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir()));
                 return;
             }
             
@@ -53,19 +53,19 @@ namespace RTS
             
             if (commandExecutor is CommandExecutorBase<IMoveCommand> moveCommand)
             {
-                moveCommand.ExecuteSpecificCommand(new UnitMoveCommand());
+                moveCommand.ExecuteSpecificCommand(_context.Inject(new UnitMoveCommand()));
                 return;
             }
 
             if (commandExecutor is CommandExecutorBase<IStopCommand> stopCommand)
             {
-                stopCommand.ExecuteSpecificCommand(new UnitStopCommand());
+                stopCommand.ExecuteSpecificCommand(_context.Inject(new UnitStopCommand()));
                 return;
             }
             
             if (commandExecutor is CommandExecutorBase<IPatrolCommand> patrolCommand)
             {
-                patrolCommand.ExecuteSpecificCommand(new UnitPatrolCommand());
+                patrolCommand.ExecuteSpecificCommand(_context.Inject(new UnitPatrolCommand()));
                 return;
             }
             
