@@ -39,14 +39,36 @@ namespace RTS
 
         private void OnButtonClick(ICommandExecutor commandExecutor)
         {
-            var unitProducer = commandExecutor as CommandExecutorBase<IProduceUnitCommand>;
-            
-            if (unitProducer != null)
+            if (commandExecutor is CommandExecutorBase<IProduceUnitCommand> produceCommand)
             {
-                unitProducer.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommand()));
+                produceCommand.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommand()));
+                return;
+            }
+            
+            if (commandExecutor is CommandExecutorBase<IAttackCommand> attackCommand)
+            {
+                attackCommand.ExecuteSpecificCommand(_context.Inject(new UnitAttackCommand()));
+                return;
+            }
+            
+            if (commandExecutor is CommandExecutorBase<IMoveCommand> moveCommand)
+            {
+                moveCommand.ExecuteSpecificCommand(new UnitMoveCommand());
                 return;
             }
 
+            if (commandExecutor is CommandExecutorBase<IStopCommand> stopCommand)
+            {
+                stopCommand.ExecuteSpecificCommand(new UnitStopCommand());
+                return;
+            }
+            
+            if (commandExecutor is CommandExecutorBase<IPatrolCommand> patrolCommand)
+            {
+                patrolCommand.ExecuteSpecificCommand(new UnitPatrolCommand());
+                return;
+            }
+            
             throw new
                 ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(OnButtonClick)} : " +
                                      $"Unknown type of commands executor:{ commandExecutor.GetType().FullName }!");

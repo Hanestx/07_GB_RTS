@@ -37,6 +37,7 @@ namespace RTS
                 var buttonGameObject = _buttonsByExecutorType
                     .First(type => type.Key.IsInstanceOfType(currentExecutor)).Value;
                 buttonGameObject.SetActive(true);
+                
                 var button = buttonGameObject.GetComponent<Button>();
                 button.onClick.AddListener(() => OnClick?.Invoke(currentExecutor));
             }
